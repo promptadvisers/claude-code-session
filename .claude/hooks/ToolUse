@@ -1,0 +1,40 @@
+#!/bin/bash
+# ToolUse Hook - Runs when tools are executed
+
+# Read the hook input (JSON from stdin)
+HOOK_INPUT=$(cat)
+
+# Extract tool name if possible
+if command -v jq &> /dev/null; then
+    TOOL_NAME=$(echo "$HOOK_INPUT" | jq -r '.tool_name // empty')
+else
+    # Simple extraction without jq
+    TOOL_NAME=$(echo "$HOOK_INPUT" | grep -o '"tool_name":"[^"]*"' | cut -d'"' -f4)
+fi
+
+# Play different sounds based on tool type
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    case "$TOOL_NAME" in
+        *bash*|*Bash*)
+            # Terminal/command execution - "Morse" sound
+            afplay /System/Library/Sounds/Morse.aiff 2>/dev/null &
+            ;;
+        *mcp*|*MCP*)
+            # MCP server usage - "Hero" sound  
+            afplay /System/Library/Sounds/Hero.aiff 2>/dev/null &
+            ;;
+        *Read*|*Write*|*Edit*)
+            # File operations - "Tink" sound
+            afplay /System/Library/Sounds/Tink.aiff 2>/dev/null &
+            ;;
+        *)
+            # Default tool usage - "Purr" sound
+            afplay /System/Library/Sounds/Purr.aiff 2>/dev/null &
+            ;;
+    esac
+fi
+
+# Log tool usage
+if [ ! -z "$TOOL_NAME" ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Tool used: $TOOL_NAME" >> ~/.claude-code-tools.log
+fi

@@ -15,7 +15,8 @@
       "Bash(find:*)",
       "mcp__exa__web_search_exa",
       "mcp__firecrawl__firecrawl_search",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(afplay:*)"
     ],
     "deny": []
   }

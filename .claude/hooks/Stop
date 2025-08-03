@@ -1,0 +1,13 @@
+#!/bin/bash
+# Stop Hook - Runs when conversation/session ends
+
+# Play session end sound (macOS) - "Sosumi" for completion
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    afplay /System/Library/Sounds/Sosumi.aiff 2>/dev/null &
+fi
+
+# Log session end
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Claude Code session ended" >> ~/.claude-code-sessions.log
+
+# Optional: Display goodbye message
+echo "👋 Claude Code session ended. Thanks for using the enhanced environment!"

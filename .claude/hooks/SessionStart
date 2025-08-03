@@ -4,6 +4,12 @@
 # Log session start
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Claude Code session started in: $(pwd)" >> ~/.claude-code-sessions.log
 
+# Play startup sound (macOS)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Play system sound "Glass" for session start
+    afplay /System/Library/Sounds/Glass.aiff 2>/dev/null &
+fi
+
 # Optional: Display a welcome message
 echo "🚀 Claude Code Enhanced Environment Loaded!"
 echo "📍 Working directory: $(pwd)"

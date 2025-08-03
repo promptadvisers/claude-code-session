@@ -12,6 +12,11 @@ else
     USER_PROMPT=$(echo "$HOOK_INPUT" | grep -o '"user_prompt":"[^"]*"' | cut -d'"' -f4)
 fi
 
+# Play prompt received sound (macOS) - subtle "Pop" sound
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    afplay /System/Library/Sounds/Pop.aiff 2>/dev/null &
+fi
+
 # Log user prompts for history/analytics (optional)
 if [ ! -z "$USER_PROMPT" ]; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $USER_PROMPT" >> ~/.claude-code-prompts.log

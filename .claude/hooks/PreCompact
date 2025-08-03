@@ -1,0 +1,13 @@
+#!/bin/bash
+# PreCompact Hook - Runs before conversation compaction
+
+# Play compaction warning sound (macOS) - "Basso" for attention
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    afplay /System/Library/Sounds/Basso.aiff 2>/dev/null &
+fi
+
+# Log compaction event
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Conversation compaction starting" >> ~/.claude-code-sessions.log
+
+# Optional: Display compaction message
+echo "🗜️  Compacting conversation to save context..."
