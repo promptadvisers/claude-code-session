@@ -1,0 +1,79 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🚀 Welcome back! Claude Code is ready to help.' && echo 'Your workspace: ' && pwd && echo ''"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✅ Task completed! Great work!' && echo 'Session duration: ' && date"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🤖 Agent finished their work!'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📝 File created/updated: ' && echo $CLAUDE_FILE_PATHS"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✏️ File edited: ' && echo $CLAUDE_FILE_PATHS"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🔔 Claude needs your input!' && echo $CLAUDE_NOTIFICATION"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '⚡ Running command...'"
+          }
+        ]
+      }
+    ]
+  }
+}

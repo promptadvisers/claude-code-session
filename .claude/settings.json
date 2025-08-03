@@ -1,0 +1,109 @@
+{
+  "allowedTools": [
+    "*"
+  ],
+  "ignorePatterns": [
+    "node_modules/**",
+    ".git/**",
+    "*.log",
+    ".DS_Store",
+    "temp/**",
+    "tmp/**",
+    "dist/**",
+    "build/**",
+    ".cache/**"
+  ],
+  "mcpServers": {
+    "browser-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@browser-mcp/mcp-server"],
+      "env": {}
+    },
+    "firecrawl": {
+      "type": "stdio", 
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx", 
+      "args": ["-y", "@executeautomation/playwright-mcp-server"],
+      "env": {}
+    },
+    "n8n-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["n8n-mcp"],
+      "env": {
+        "N8N_API_URL": "${N8N_API_URL}",
+        "N8N_API_KEY": "${N8N_API_KEY}"
+      }
+    },
+    "semgrep": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["semgrep-mcp"],
+      "env": {
+        "SEMGREP_APP_TOKEN": "${SEMGREP_APP_TOKEN}"
+      }
+    },
+    "Ref": {
+      "type": "http",
+      "url": "https://api.ref.tools/mcp?apiKey=${REF_API_KEY}"
+    },
+    "exa": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      }
+    },
+    "21st-dev-magic": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": {
+        "API_KEY": "${MAGIC_API_KEY}"
+      }
+    },
+    "puppeteer-mcp-claude": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "puppeteer-mcp-claude"],
+      "env": {}
+    }
+  },
+  "projectSettings": {
+    "autoCompact": true,
+    "compactThreshold": 80,
+    "defaultModel": "default",
+    "enableThinking": true,
+    "enableHooks": false
+  },
+  "customCommands": {
+    "help": {
+      "description": "Get comprehensive help on any topic",
+      "file": ".claude/commands/help.md"
+    },
+    "plan": {
+      "description": "Create detailed project plans",
+      "file": ".claude/commands/plan.md"
+    },
+    "organize": {
+      "description": "Organize project structure and files",
+      "file": ".claude/commands/organize.md"
+    },
+    "review": {
+      "description": "Comprehensive code and content review",
+      "file": ".claude/commands/review.md"
+    },
+    "summarize": {
+      "description": "Summarize content or conversations",
+      "file": ".claude/commands/summarize.md"
+    }
+  }
+}
