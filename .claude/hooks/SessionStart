@@ -1,0 +1,10 @@
+#!/bin/bash
+# SessionStart Hook - Runs when a new Claude Code session begins
+
+# Log session start
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Claude Code session started in: $(pwd)" >> ~/.claude-code-sessions.log
+
+# Optional: Display a welcome message
+echo "🚀 Claude Code Enhanced Environment Loaded!"
+echo "📍 Working directory: $(pwd)"
+echo "🤖 Hooks are active and monitoring your session"

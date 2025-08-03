@@ -1,0 +1,30 @@
+#!/bin/bash
+# UserPromptSubmit Hook - Runs before processing user input
+
+# Read the hook input (JSON from stdin)
+HOOK_INPUT=$(cat)
+
+# Extract user prompt (using jq if available, fallback to grep)
+if command -v jq &> /dev/null; then
+    USER_PROMPT=$(echo "$HOOK_INPUT" | jq -r '.user_prompt // empty')
+else
+    # Simple extraction without jq
+    USER_PROMPT=$(echo "$HOOK_INPUT" | grep -o '"user_prompt":"[^"]*"' | cut -d'"' -f4)
+fi
+
+# Log user prompts for history/analytics (optional)
+if [ ! -z "$USER_PROMPT" ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $USER_PROMPT" >> ~/.claude-code-prompts.log
+fi
+
+# Example: Check for specific keywords and provide context
+if [[ "$USER_PROMPT" =~ (security|vulnerability|audit) ]]; then
+    echo "🔒 Security-related request detected. Semgrep MCP server is available for code analysis."
+fi
+
+if [[ "$USER_PROMPT" =~ (automate|scrape|browser) ]]; then
+    echo "🤖 Automation request detected. Multiple browser automation tools available: Playwright, Puppeteer, browser-mcp"
+fi
+
+# Always allow the prompt to continue (exit 0)
+exit 0

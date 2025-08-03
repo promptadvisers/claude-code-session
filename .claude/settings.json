@@ -82,7 +82,7 @@
     "compactThreshold": 80,
     "defaultModel": "default",
     "enableThinking": true,
-    "enableHooks": false
+    "enableHooks": true
   },
   "customCommands": {
     "help": {
